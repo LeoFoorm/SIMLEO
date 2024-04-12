@@ -1,0 +1,35 @@
+#include <iostream>
+#include "G4RunManager.hh"
+
+#include "G4UImanager.hh"
+#include "G4UIExecutive.hh"
+#include "G4VisManager.hh"
+#include "G4VisExecutive.hh"
+#include "construction.hh"
+#include "construction.cc"
+
+//argc and argv are parameters used to process command-line arguments. argc argument count and
+// argv argument vector.
+
+
+
+int main(int argc,char** argv)
+{
+    G4RunManager *runManager = new G4RunManager;
+    
+    runManager->SetUserInitialization(new myDetectorConstruction());
+    
+    runManager->Initialize();
+    
+    G4UIExecutive *ui = new G4UIExecutive(argc,argv);
+    
+    G4VisManager * visManager = new G4VisExecutive();
+    visManager->Initialize();
+    
+    G4UImanager *UImamager = G4UImanager::GetUIpointer();
+    
+    ui->SessionStart();
+    
+    return 0;
+}
+
