@@ -6,7 +6,7 @@
 #include "G4VisManager.hh"
 #include "G4VisExecutive.hh"
 #include "construction.hh"
-#include "construction.cc"
+
 
 //argc and argv are parameters used to process command-line arguments. argc argument count and
 // argv argument vector.
