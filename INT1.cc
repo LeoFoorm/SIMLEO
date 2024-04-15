@@ -18,6 +18,8 @@ int main(int argc,char** argv)
     G4RunManager *runManager = new G4RunManager;
     
     runManager->SetUserInitialization(new myDetectorConstruction());
+    runManager->SetUserInitialization(new PhysicsList());
+    
     
     runManager->Initialize();
     
@@ -27,6 +29,10 @@ int main(int argc,char** argv)
     visManager->Initialize();
     
     G4UImanager *UImamager = G4UImanager::GetUIpointer();
+
+     UImanager->ApplyCommand("/vis/open OGL");
+    //UImanager->ApplyCommand("/vis/viewer/set/ViewpointVector 1 1 1");
+     UImanager->ApplyCommand("/vis/drawVolume");
     
     ui->SessionStart();
     
