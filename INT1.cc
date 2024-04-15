@@ -6,6 +6,8 @@
 #include "G4VisManager.hh"
 #include "G4VisExecutive.hh"
 #include "construction.hh"
+#include "Physics.hh"
+#include "ActionInitialization.hh"
 
 
 //argc and argv are parameters used to process command-line arguments. argc argument count and
@@ -19,7 +21,7 @@ int main(int argc,char** argv)
     
     runManager->SetUserInitialization(new myDetectorConstruction());
     runManager->SetUserInitialization(new PhysicsList());
-    
+    runManager->SetUserInitialization(new ActionInitialization());
     
     runManager->Initialize();
     
@@ -28,11 +30,13 @@ int main(int argc,char** argv)
     G4VisManager * visManager = new G4VisExecutive();
     visManager->Initialize();
     
-    G4UImanager *UImamager = G4UImanager::GetUIpointer();
+    G4UImanager *UImanager = G4UImanager::GetUIpointer();
 
-     UImanager->ApplyCommand("/vis/open OGL");
+    UImanager->ApplyCommand("/vis/open OGL");
     //UImanager->ApplyCommand("/vis/viewer/set/ViewpointVector 1 1 1");
-     UImanager->ApplyCommand("/vis/drawVolume");
+    UImanager->ApplyCommand("/vis/drawVolume");
+    UImanager->ApplyCommand("/vis/viewer/set/autoRefresh true");//update everytime it creates a new event
+    UImanager->ApplyCommand("/vis/scene/add/trajectories smooth");//to show the particle
     
     ui->SessionStart();
     
