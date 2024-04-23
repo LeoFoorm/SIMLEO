@@ -27,7 +27,8 @@ class myDetectorConstruction : public G4VUserDetectorConstruction
 
   myDetectorConstruction();
   ~myDetectorConstruction();
-  
+
+  G4double wavelength, lightOutput;
 
 //lo que sigue es lo importante de definir esta clase
 //toda la construccion del detector va a estar dentro de la funcion Construct()
