@@ -11,7 +11,7 @@
 #include "G4PVPlacement.hh"
 #include "G4NistManager.hh"
 #include "G4SystemOfUnits.hh"
-
+#include "G4OpticalPhysics.hh"
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;
