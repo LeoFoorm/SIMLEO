@@ -46,6 +46,7 @@ G4VPhysicalVolume *myDetectorConstruction::Construct()
        contador++;
       } 
 // Get nist material manager
+  G4OpticalParameters::Instance()->SetScintFiniteRiseTime(true);
   G4NistManager *nist = G4NistManager::Instance();
   G4Material *worldMaterial = nist->FindOrBuildMaterial("G4_AIR");
   G4Material *plastic = nist->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");
