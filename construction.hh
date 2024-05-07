@@ -12,6 +12,8 @@
 #include "G4NistManager.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4OpticalPhysics.hh"
+#include "detector.hh"
+#include "G4GenericMessenger.hh" //*  06/05 6:30 pm
 
 class G4VPhysicalVolume;
 class G4LogicalVolume;
@@ -27,18 +29,39 @@ class myDetectorConstruction : public G4VUserDetectorConstruction
 
   myDetectorConstruction();
   ~myDetectorConstruction();
-
-  G4double wavelength, lightOutput;
+  
+  
 
 //lo que sigue es lo importante de definir esta clase
 //toda la construccion del detector va a estar dentro de la funcion Construct()
-
-  //G4VPhysicalVolume* Construct() override;
-    
-//Por lo que entiendo, sería igual poner
   virtual G4VPhysicalVolume *Construct(); 
+  void ConstructProtoDetector();//*  06/05 6:50 pm
+  void ConstructAtmosphere();//*  06/05 6:50 pm
 
+  G4double wavelength, lightOutput;
+
+  private: 
+    G4LogicalVolume *Logicsipm;
+  //In order to give the sensity characteristic to the detector, we have to references to this object outsid. That's why we create this private
+    virtual void ConstructSDandField();
+
+    G4double env_sizeX, env_sizeY, env_sizeZ; //*  06/05 6:40 pm
+
+    G4GenericMessenger *fMessenger; //*  06/05 6:30 pm
+
+    G4Box  *SolidWorld, *Solidbar, *Solidsipm, *SolidAtmos;
+    G4LogicalVolume *LogicWorld, *Logicbar, *LogicAtmos[5];  //<------- Posible problema futuro con el numero de layers
+    G4VPhysicalVolume *PhysicalWorld, *Physicalbar, *Physicalsipm, *PhysicalAtmos[5];
+
+    void DefineMaterials();
+
+    G4Material *plastic, *worldMaterial, *Air[5];
+    G4Element *N, *O; //*  06/05 7:26 pm
     
+    
+    G4bool Atmospheric, ProtoDetector; //*  06/05 6:30 pm
+
+
 };
 
 
