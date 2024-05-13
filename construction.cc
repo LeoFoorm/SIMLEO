@@ -137,7 +137,7 @@ void myDetectorConstruction::ConstructProtoDetector()
   G4double sipm_Y = 0.5*cm;
   G4double sipm_Z = 0.01*cm;
   //position vector for sipm
-   G4ThreeVector possipm = G4ThreeVector(0, 0, 100*cm);
+   G4ThreeVector possipm = G4ThreeVector(0, 0, 100.011*cm);
   
   Solidsipm = new G4Box("Solidsipm", sipm_X, sipm_Y, sipm_Z );
   Logicsipm = new G4LogicalVolume(Solidsipm, worldMaterial, "Logicsipm");
