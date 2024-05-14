@@ -1,6 +1,6 @@
 /gun/momentumAmp 0.5 Gev
-/run/beamOn 100
+/run/beamOn 10
 /gun/momentumAmp 1 Gev
-/run/beamOn 100 
+/run/beamOn 10 
 /gun/momentumAmp 5 Gev
-/run/beamOn 100  
+/run/beamOn 10  
