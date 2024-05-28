@@ -39,6 +39,8 @@ class myDetectorConstruction : public G4VUserDetectorConstruction
   void ConstructProtoDetector();//*  06/05 6:50 pm
   void ConstructAtmosphere();//*  06/05 6:50 pm
 
+  G4LogicalVolume *GetScoringVolume() const {return fScoringVolume;}//<---- 24/05 12 pm
+
   G4double wavelength, lightOutput;
 
   private: 
@@ -63,6 +65,8 @@ class myDetectorConstruction : public G4VUserDetectorConstruction
     G4bool Atmospheric, ProtoDetector; //*  06/05 6:30 pm
 
     G4OpticalSurface *mirrorsurface; //based on the PET video 13/05 1:46 pm
+
+    G4LogicalVolume *fScoringVolume;
 
 
 };

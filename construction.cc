@@ -77,8 +77,8 @@ void myDetectorConstruction::DefineMaterials()
  worldMaterial = nist->FindOrBuildMaterial("G4_AIR");
  plastic = nist->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");
  mylarMaterial = nist->FindOrBuildMaterial("G4_MYLAR");
-
  mirrorsurface = new G4OpticalSurface("mirrorsurface");
+
  mirrorsurface->SetType(dielectric_dielectric);
  mirrorsurface->SetFinish(polishedfrontpainted);
  mirrorsurface->SetModel(unified);
@@ -88,6 +88,7 @@ void myDetectorConstruction::DefineMaterials()
  G4MaterialPropertiesTable *propworld=new G4MaterialPropertiesTable();
  G4MaterialPropertiesTable *propmylar=new G4MaterialPropertiesTable();
  
+ //############################ Atmospheric #################################
  G4double density0 =  1.29*kg/m3;   //*  06/05 7:21 pm
  G4double aN = 14.01*g/mole;   //Molar mass of nitrogene *  06/05 7:21 pm
  G4double aO = 16.00*g/mole;  //Molar mass of oxigene *  06/05 7:21 pm
@@ -95,7 +96,6 @@ void myDetectorConstruction::DefineMaterials()
 
  N = new G4Element("Nitrogen", "N", 7, aN);//*  06/05 7:26 pm
  O = new G4Element("Oxygen", "O", 8, aO); //*  06/05 7:26 pm
-
 
 //*  06/05 7:30 pm
 //lo siguiente es una funcion que modela la atmosfera (la densidad)
@@ -117,12 +117,13 @@ void myDetectorConstruction::DefineMaterials()
   Air[i]->AddElement(N, 70*perCent);
   Air[i]->AddElement(O, 30*perCent);
  }
+//###########################################################################
 
  propworld->AddProperty("RINDEX",energy, rindexWorld,numberOfEntries);
  prop->AddProperty("RINDEX",energy, RI,numberOfEntries);
  prop->AddProperty("SCINTILLATIONCOMPONENT1",energy,fraction,numberOfEntries);//como el FASTCOMPONENT
  prop->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 1.8*ns);
- prop->AddConstProperty("SCINTILLATIONRISETIME1", 0.7*ns);
+ prop->AddConstProperty("SCINTILLATIONRISETIME1", 0.7*ns); //decay time of the scintillator
  prop->AddConstProperty("SCINTILLATIONYIELD", 10./keV);//amount of photons per (in this case) KeV
  prop->AddConstProperty("RESOLUTIONSCALE", 1.);
  prop->AddProperty("ABSLENGTH",energy,absSC,numberOfEntries);///lo solucioné sólo poniendolo en un ciclo, no en ambos
@@ -149,7 +150,6 @@ void myDetectorConstruction::ConstructProtoDetector()
   
   Solidbar = new G4Box("Solidbar", bar_X, bar_Y, bar_Z );
   Logicbar = new G4LogicalVolume(Solidbar, plastic, "Logicbar");
-  G4LogicalSkinSurface *skin= new G4LogicalSkinSurface("skin", Logicmylar, mirrorsurface);//* 13/05 4 pm 
   Physicalbar = new G4PVPlacement(0, G4ThreeVector(), Logicbar, "Physicalbar", LogicWorld, false, 0, true);
 
 
@@ -159,20 +159,25 @@ void myDetectorConstruction::ConstructProtoDetector()
   G4double sipm_Y = 0.6*cm;
   G4double sipm_Z = 0.01*cm;
   //position vector for sipm
-  G4ThreeVector possipm = G4ThreeVector(0, 0, 100.011*cm);
+  G4ThreeVector possipm = G4ThreeVector(0, 0, 100.0051*cm);
   
   Solidsipm = new G4Box("Solidsipm", sipm_X, sipm_Y, sipm_Z );
   Logicsipm = new G4LogicalVolume(Solidsipm, worldMaterial, "Logicsipm");
+
+  fScoringVolume = Logicsipm;
+
   Physicalsipm = new G4PVPlacement(0, possipm, Logicsipm, "Physicalsipm", LogicWorld, false, 0, true);
 
+ 
 
 //############################# MYLAR ###############################
  G4double mylar_x = 5.001*cm;
  G4double mylar_y = 1.001*cm;
- G4double mylar_z = 100.001*cm;
+ G4double mylar_z = 100.0011*cm;
 
  Solidmylar = new G4Box("Solidmylar", mylar_x, mylar_y, mylar_z);
  Logicmylar = new G4LogicalVolume(Solidmylar,mylarMaterial,"Logicmylar");
+ G4LogicalSkinSurface *skin= new G4LogicalSkinSurface("skin", Logicmylar, mirrorsurface); //<--- 24/05 2 pm (estaba en la barra. Aqui ya está correcto)
  Physicalmylar = new G4PVPlacement(0,G4ThreeVector(),Logicmylar,"Physicalmylar",LogicWorld,false,0,true);
  
 

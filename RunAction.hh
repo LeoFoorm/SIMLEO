@@ -3,6 +3,9 @@
 
 #include "G4UserRunAction.hh"
 #include "G4AnalysisManager.hh"		//ya no es g4root.hh, ahora es este que puse.
+#include "G4RunManager.hh"
+#include "G4Run.hh"
+
 
 class RunAction : public G4UserRunAction
 {

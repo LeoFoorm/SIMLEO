@@ -5,7 +5,9 @@
 
 #include "G4VUserActionInitialization.hh"
 #include "PrimaryGeneratorAction.hh"
-
+#include "RunAction.hh" //<--- 20/05 00:30 am
+#include "EventAction.hh" //<--- 23/05 11 pm
+#include "SteppingAction.hh"
 class ActionInitialization : public G4VUserActionInitialization
 {
  public:
