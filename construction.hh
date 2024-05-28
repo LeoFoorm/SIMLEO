@@ -66,7 +66,7 @@ class myDetectorConstruction : public G4VUserDetectorConstruction
 
     G4OpticalSurface *mirrorsurface; //based on the PET video 13/05 1:46 pm
 
-    G4LogicalVolume *fScoringVolume;
+    G4LogicalVolume *fScoringVolume; //<---- 24/05 12 pm
 
 
 };

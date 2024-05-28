@@ -89,6 +89,7 @@ void myDetectorConstruction::DefineMaterials()
  G4MaterialPropertiesTable *propmylar=new G4MaterialPropertiesTable();
  
  //############################ Atmospheric #################################
+ //##########################################################################
  G4double density0 =  1.29*kg/m3;   //*  06/05 7:21 pm
  G4double aN = 14.01*g/mole;   //Molar mass of nitrogene *  06/05 7:21 pm
  G4double aO = 16.00*g/mole;  //Molar mass of oxigene *  06/05 7:21 pm
@@ -118,6 +119,7 @@ void myDetectorConstruction::DefineMaterials()
   Air[i]->AddElement(O, 30*perCent);
  }
 //###########################################################################
+//##########################################################################
 
  propworld->AddProperty("RINDEX",energy, rindexWorld,numberOfEntries);
  prop->AddProperty("RINDEX",energy, RI,numberOfEntries);

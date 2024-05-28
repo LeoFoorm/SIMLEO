@@ -15,6 +15,11 @@ class RunAction : public G4UserRunAction
 
   virtual void BeginOfRunAction(const G4Run*);
   virtual void EndOfRunAction(const G4Run*);
+
+  void AddPhotonHit() { photonHits++;} //<-- 27/05 7 pm
+
+private:
+ int photonHits; //<-- 27/05 7 pm
 };
 
 #endif

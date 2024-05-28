@@ -18,7 +18,7 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
 
     G4ThreeVector posPhoton = preStepPoint->GetPosition();//<------
     G4ThreeVector momentumphoton = preStepPoint->GetMomentum(); //<-- 20/05 11 pm
-    G4double wlen = (1.239841939*eV/momentumphoton.mag())*1E+03;
+    G4double wlen = (1.239841939*eV/momentumphoton.mag())*1E+03; //EN QUE UNIDADES!!!!nanometros
 
     //G4cout<<" PHOTON POSITION "<<posPhoton<<G4endl;
     //THIS TO PRINT THE DETECTOR THAT HAVE BEEN HIT. BUT I ONLY HAVE ONE DETECTOR!
@@ -35,7 +35,13 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     G4cout << " PHOTON WAVELENGTH:  " << wlen << G4endl;
 
     G4int evt = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID(); //<-- 20/05 1:15 am
-    
+
+     //#################################################<-- 27/05 7 pm NUMBER OF DETECTED PHOTONS
+    const RunAction *runaction = static_cast< const RunAction* >(G4RunManager::GetRunManager()->GetUserRunAction());
+    RunAction *runactionNonConst = const_cast<RunAction *>(runaction); //<--- linea que resuelve error
+    runactionNonConst->AddPhotonHit();
+    //#################################################<-- 27/05 7 pm 
+
     G4AnalysisManager *man = G4AnalysisManager::Instance(); //<-- 20/05 1:15 am (y lo de abajo)
 
     man->FillNtupleIColumn(0,0,evt); //<------------ 20/05 11 pm

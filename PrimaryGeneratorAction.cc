@@ -14,7 +14,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
  G4ThreeVector momentum(0.,-1.,0.); //consistente con el momento total 
  fParticleGun->SetParticlePosition(position);
  fParticleGun->SetParticleMomentumDirection(momentum); //only direction
- fParticleGun->SetParticleMomentum(0.5*GeV); //*
+ fParticleGun->SetParticleMomentum(1.*GeV); //*
  fParticleGun->SetParticleDefinition(particle);
 
 }

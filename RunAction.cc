@@ -39,6 +39,8 @@ void RunAction:: BeginOfRunAction(const G4Run* run)
 
  man->OpenFile("Output"+strRunID.str()+".root");
 
+ photonHits = 0; //<-- 27/05 7 pm
+
 }
 
 void RunAction::EndOfRunAction(const G4Run*)
@@ -47,4 +49,6 @@ void RunAction::EndOfRunAction(const G4Run*)
  
  man->Write();
  man->CloseFile();
+
+ G4cout << "NUMBER OF PHOTONS DETECTED: " << photonHits << G4endl; //<-- 27/05 7 pm
 }
