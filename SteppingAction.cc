@@ -27,7 +27,7 @@ void SteppingAction::UserSteppingAction(const G4Step *step)
 
  const myDetectorConstruction *detectorconstruction = static_cast < const myDetectorConstruction* > (G4RunManager::GetRunManager()->GetUserDetectorConstruction());
 
- Gputop el q   ue lño l4LogicalVolume *fScoringVolume = detectorconstruction->GetScoringVolume();
+ G4LogicalVolume *fScoringVolume = detectorconstruction->GetScoringVolume();
 
  if(scoringvolume != fScoringVolume)
  {
