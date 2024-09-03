@@ -1,3 +1,10 @@
+//Author:   Carlos Leonardo Fernandez Luna
+
+//Project:  Construction of detector (.cc)
+
+//THIS IS THE   __ main __
+
+
 #include <iostream>
 #include "G4RunManager.hh"
 #include "G4UImanager.hh"
@@ -8,7 +15,7 @@
 #include "Physics.hh"
 #include "ActionInitialization.hh"
 #include "G4OpticalPhysics.hh"
-//
+
 
 //argc and argv are parameters used to process command-line arguments. argc argument count and
 // argv argument vector.
@@ -39,9 +46,11 @@ int main(int argc,char** argv)
     UImanager->ApplyCommand("/vis/viewer/set/autoRefresh true");//update everytime it creates a new event
     UImanager->ApplyCommand("/vis/scene/add/trajectories smooth");//to show the particle
     UImanager->ApplyCommand("/vis/scene/endofEventAction accumulate");//to show the particle
-    UImanager->ApplyCommand("/vis/scene/add/axes");
-    UImanager->ApplyCommand("/vis/scene/scale 0.5 m");
+    UImanager->ApplyCommand("/vis/scene/add/axes 0 0 0 1 m");
+    UImanager->ApplyCommand("/vis/scene/add/hits");
     UImanager->ApplyCommand("/vis/scene/add/eventID");
+    UImanager->ApplyCommand("/vis/scene/add/date");
+    //UImanager->ApplyCommand("/vis/scene/");
 
     ui->SessionStart();
     

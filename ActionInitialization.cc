@@ -11,10 +11,10 @@ void ActionInitialization::Build() const
     PrimaryGeneratorAction *generator = new PrimaryGeneratorAction();
     SetUserAction(generator);
 
-    RunAction *runaction = new RunAction();//<--- 20/05 00:30 am
+    RunAction *runaction = new RunAction();
     SetUserAction(runaction);
 
-    EventAction *eventaction = new EventAction(runaction); //<---- 23/05 11 pm
+    EventAction *eventaction = new EventAction(runaction); 
     SetUserAction(eventaction);
 
     SteppingAction *steppingaction = new SteppingAction(eventaction);
