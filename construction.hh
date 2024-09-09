@@ -1,5 +1,3 @@
-
-
 #ifndef CONSTRUCTION_HH
 #define CONSTRUCTION_HH
 
@@ -16,6 +14,7 @@
 #include "G4GenericMessenger.hh" 
 #include "G4OpticalSurface.hh"
 #include "G4LogicalSkinSurface.hh" 
+#include "G4SubtractionSolid.hh"
 
 
 class G4VPhysicalVolume;
@@ -63,7 +62,7 @@ class myDetectorConstruction : public G4VUserDetectorConstruction
     G4GenericMessenger *fMessenger; 
 
 
-    G4Box  *SolidWorld, *Solidbar, *Solidsipm, *SolidAtmos, *Solidmylar;
+    G4Box  *SolidWorld, *Solidbar, *Solidsipm, *SolidAtmos, *Solidmylar, *SolidInnermylar;
     G4LogicalVolume *LogicWorld, *Logicbar, *LogicAtmos[5], *Logicmylar;  
     G4VPhysicalVolume *PhysicalWorld, *Physicalbar, *Physicalsipm, *PhysicalAtmos[5], *Physicalmylar;
 

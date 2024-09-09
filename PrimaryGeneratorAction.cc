@@ -10,7 +10,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
  //G4String particleName = "G4MuonPlus"; //maybe its name is "opticalphoton" //* se puso como comentario
  G4ParticleDefinition *particle = particleTable->FindParticle(13); //* para muon solo poner 13, no string
 
- G4ThreeVector position(0.,4*m,0.);
+ G4ThreeVector position(0.,0.1*m,0.);
  G4ThreeVector momentum(0.,-1.,0.); //consistente con el momento total 
  fParticleGun->SetParticlePosition(position);
  fParticleGun->SetParticleMomentumDirection(momentum); //only direction

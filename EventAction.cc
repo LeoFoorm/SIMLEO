@@ -26,8 +26,8 @@ void EventAction::EndOfEventAction(const G4Event*)
 
  G4AnalysisManager *man = G4AnalysisManager::Instance();  // IMPORTANTE
  
- man->FillH1(0,fEdep);
+ //man->FillH1(0,fEdep);   
+man->FillNtupleDColumn(2,0,fEdep);
+man->AddNtupleRow(2);
 
- //man->AddNtupleRow(2);
- 
 }

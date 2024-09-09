@@ -19,11 +19,12 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
 
     G4ThreeVector posPhoton = preStepPoint->GetPosition();
     G4ThreeVector momentumphoton = preStepPoint->GetMomentum(); 
-    G4double time = preStepPoint->GetGlobalTime(); //since the particle was created
+    G4double time = preStepPoint->GetGlobalTime(); //since the primary particle was created; since the beggining of the event;Muon to Scintillator
+    G4double ltime = preStepPoint->GetLocalTime(); //since the particle was created; photon to SiPM
     G4double wlen = (1.239841939*eV/momentumphoton.mag())*1E+03; //UNIDADES nanometros
 
-    //G4cout<<" PHOTON POSITION "<<posPhoton<<G4endl;
-    //THIS TO PRINT THE DETECTOR THAT HAVE BEEN HIT. BUT I ONLY HAVE ONE DETECTOR!
+    //G4cout<<" PHOTON POSITION "<<posPhoton<<G4endl;  //position of the detected photons
+    
 
     const G4VTouchable *touchable = aStep->GetPreStepPoint()->GetTouchable();
     G4int copyNo = touchable->GetCopyNumber();
@@ -31,9 +32,10 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     G4VPhysicalVolume *PhysVol = touchable->GetVolume();
     G4ThreeVector posDetector = PhysVol->GetTranslation();
 
-    G4cout << " DETECTOR POSITION:  " << posDetector << G4endl;
-    G4cout << " PHOTON WAVELENGTH:  " << wlen << G4endl;
-    G4cout << " GLOBAL TIME  " << time << G4endl;
+    //G4cout << " DETECTOR POSITION:  " << posDetector << G4endl;
+    //G4cout << " PHOTON WAVELENGTH:  " << wlen << G4endl;
+    //G4cout << " GLOBAL TIME  " << time << G4endl;
+    G4cout << " LOCAL TIME  " << ltime << G4endl;
 
     G4int evt = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID(); 
 
@@ -43,6 +45,9 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     runactionNonConst->AddPhotonHit();
     //#################################################
 
+
+
+
     G4AnalysisManager *man = G4AnalysisManager::Instance(); 
 
     man->FillNtupleIColumn(0,0,evt); 
@@ -51,9 +56,10 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     man->FillNtupleDColumn(0,3,momentumphoton[2]);
     man->FillNtupleDColumn(0,4,wlen);  
     man->FillNtupleDColumn(0,5,time);
+    man->FillNtupleDColumn(0,6,ltime);
     man->AddNtupleRow(0); 
 
     man->FillNtupleIColumn(1,0,evt); 
-    man->FillNtupleDColumn(1,1,posDetector[2]); //por qué solo el [2] ?
+    man->FillNtupleDColumn(1,1,posDetector[2]); //por qué solo el [2] ? PORQUE ES PARA LA POSICIÓN Z    
     man->AddNtupleRow(1);
 }

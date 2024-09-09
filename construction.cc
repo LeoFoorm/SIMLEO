@@ -23,9 +23,9 @@ myDetectorConstruction::myDetectorConstruction()
 
   DefineMaterials();
 
-  env_sizeX = 5*m;
-  env_sizeY = 5*m;
-  env_sizeZ = 5*m;
+  env_sizeX = 3*m;
+  env_sizeY = 3*m;
+  env_sizeZ = 3*m;
   
 }
 
@@ -99,7 +99,6 @@ void myDetectorConstruction::DefineMaterials()
  G4MaterialPropertiesTable *propworld=new G4MaterialPropertiesTable();
  G4MaterialPropertiesTable *propmylar=new G4MaterialPropertiesTable();
  
- //############################ Atmospheric #################################
  
 //##########################################################################
 
@@ -128,9 +127,9 @@ void myDetectorConstruction::ConstructProtoDetector()
 { 
 //############################ BARRA ###########################
 
-  G4double bar_X = 5*cm;
-  G4double bar_Y = 1*cm;
-  G4double bar_Z = 100*cm;
+  G4double bar_X = 2.5*cm;
+  G4double bar_Y = 0.5*cm;
+  G4double bar_Z = 50*cm;
   
   Solidbar = new G4Box("Solidbar", bar_X, bar_Y, bar_Z );
   Logicbar = new G4LogicalVolume(Solidbar, plastic, "Logicbar");
@@ -142,11 +141,11 @@ void myDetectorConstruction::ConstructProtoDetector()
 
 //############################ DETECTOR (SiPM) ###########################
 
-  G4double sipm_X = 0.6*cm;
-  G4double sipm_Y = 0.6*cm;
-  G4double sipm_Z = 0.01*cm;
+  G4double sipm_X = 0.3*cm;
+  G4double sipm_Y = 0.3*cm;
+  G4double sipm_Z = 0.025*cm;
   
-  G4ThreeVector possipm = G4ThreeVector(0, 0, 100.0051*cm);
+  G4ThreeVector possipm = G4ThreeVector(0, 0, 50.03*cm);
   
   Solidsipm = new G4Box("Solidsipm", sipm_X, sipm_Y, sipm_Z );
   Logicsipm = new G4LogicalVolume(Solidsipm, worldMaterial, "Logicsipm");
@@ -158,14 +157,20 @@ void myDetectorConstruction::ConstructProtoDetector()
  
  //############################# MYLAR ###############################
 
- G4double mylar_x = 5.001*cm;
- G4double mylar_y = 1.001*cm;
- G4double mylar_z = 100.0011*cm;
+ G4double mylar_x = 2.52*cm;
+ G4double mylar_y = 0.52*cm;
+ G4double mylar_z = 50.08*cm;
 
+ //This will be the outer mylar part
  Solidmylar = new G4Box("Solidmylar", mylar_x, mylar_y, mylar_z);
- Logicmylar = new G4LogicalVolume(Solidmylar,mylarMaterial,"Logicmylar");
 
- //fScoringVolume = Logicmylar;
+ SolidInnermylar = new G4Box("SolidInnermylar", mylar_x-0.01*cm, mylar_y-0.01*cm, mylar_z-0.01*cm);
+
+ G4SubtractionSolid* hollowMylarBox = new G4SubtractionSolid("HollowMylarBox", Solidmylar, SolidInnermylar);
+
+ Logicmylar = new G4LogicalVolume(hollowMylarBox, mylarMaterial, "Logicmylar");
+
+
 
  G4LogicalSkinSurface *skin= new G4LogicalSkinSurface("skin", Logicmylar, mirrorsurface); 
  Physicalmylar = new G4PVPlacement(0,G4ThreeVector(),Logicmylar,"Physicalmylar",LogicWorld,false,0,true);
@@ -173,22 +178,6 @@ void myDetectorConstruction::ConstructProtoDetector()
  
 //####################################################################
 }
-
-//####################################################################################################################################################################
-void myDetectorConstruction::ConstructAtmosphere() 
-{
-   //SolidAtmos = new G4Box("SolidAtmos", env_sizeX/5., env_sizeY/5., env_sizeZ/5.);
-
-  // for (G4int i = 0; i<5; i++)
-   //{
-     //LogicAtmos[i] = new G4LogicalVolume(SolidAtmos,Air[i] ,"LogicAtmos" );
-
-     //PhysicalAtmos[i] = new G4PVPlacement(0, G4ThreeVector(0,0,env_sizeZ/5.*2*i - env_sizeZ + env_sizeZ/5.), LogicAtmos[i], "PhysicalAtmos", LogicWorld, i, true);
-   //} 
-}
-//####################################################################################################################################################################
-
-
 
 
 G4VPhysicalVolume *myDetectorConstruction::Construct()
@@ -204,12 +193,10 @@ G4VPhysicalVolume *myDetectorConstruction::Construct()
   //parametros: rotation, origen (0,0,0), el logical volume, su nombre, si va a estar dentro de otro volumen, copias, check overlaps
   PhysicalWorld = new G4PVPlacement(0, G4ThreeVector(), LogicWorld, "PhysicalWorld", 0, false, 0, true);
 
+  
   if(ProtoDetector) 
    ConstructProtoDetector();
 
-  if(Atmospheric) 
-   ConstructAtmosphere();
- 
   //the mother volume always needs this return
   return PhysicalWorld; 
 }
