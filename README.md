@@ -4,3 +4,8 @@ This a master degree project in order to simulate some muon detectors for ALICE 
 Para correrlo recuerda primero hacer source a GEANT4.
 Despues debes crean un directorio donde se hará el build de CMake (recomiendo llamarlo "build").
 Dentro de este directorio haz cmake .. y luego make. Luego corres el programa con ./INT1.cc
+
+
+Para obtener el gráfico de Bethe Block, en ROOT hacer:
+
+Edep->Draw("Energy_Deposition:Muon_Momentum");
