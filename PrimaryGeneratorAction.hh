@@ -1,11 +1,13 @@
-//aqui se va a definir el gun
+//
 #ifndef PRIMARYGENERATORACTION_HH
 #define PRIMARYGENERATORACTION_HH
 
 #include "G4VUserPrimaryGeneratorAction.hh"
+#include "G4AnalysisManager.hh" 
 #include "G4ParticleGun.hh"
 #include "G4SystemOfUnits.hh"
 #include "G4ParticleTable.hh"
+#include "Randomize.hh"
 
 
 
@@ -16,6 +18,7 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   ~PrimaryGeneratorAction();
 
   virtual void GeneratePrimaries(G4Event*);
+
  private:
   G4ParticleGun *fParticleGun;
 

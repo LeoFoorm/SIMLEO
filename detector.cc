@@ -35,7 +35,7 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     //G4cout << " DETECTOR POSITION:  " << posDetector << G4endl;
     //G4cout << " PHOTON WAVELENGTH:  " << wlen << G4endl;
     //G4cout << " GLOBAL TIME  " << time << G4endl;
-    G4cout << " LOCAL TIME  " << ltime << G4endl;
+    //G4cout << " LOCAL TIME  " << ltime << G4endl;
 
     G4int evt = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID(); 
 

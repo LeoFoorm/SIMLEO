@@ -81,9 +81,8 @@ void myDetectorConstruction::DefineMaterials()
   G4int numberOfEntries = energy.size();
 
 
- G4NistManager *nist = G4NistManager::Instance();
  G4OpticalParameters::Instance()->SetScintFiniteRiseTime(true);
-
+ G4NistManager *nist = G4NistManager::Instance();
 
  worldMaterial = nist->FindOrBuildMaterial("G4_AIR");
  plastic = nist->FindOrBuildMaterial("G4_PLASTIC_SC_VINYLTOLUENE");
