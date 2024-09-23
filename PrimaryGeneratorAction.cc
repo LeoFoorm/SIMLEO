@@ -11,7 +11,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
 
 
 
- G4ThreeVector position(0.,0.1*m,0.);
+ G4ThreeVector position(0.,0.01*m,0.);
  G4ThreeVector momentum(0.,-1.,0.);  
  fParticleGun->SetParticlePosition(position);
  fParticleGun->SetParticleMomentumDirection(momentum); //only direction
@@ -32,13 +32,13 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
 
  G4double randomNumber = G4UniformRand();
- G4double momentumParticle = std::round(randomNumber * 20) * 0.5 * GeV;
+ G4double momentumParticle = randomNumber*10;
 
- G4cout << "MOMENTUM FOR THIS EVENT: " << momentumParticle / GeV << " GeV" << G4endl;
+ G4cout << "MOMENTUM FOR THIS EVENT: " << momentumParticle << " GeV" << G4endl;
 
 
 
- fParticleGun->SetParticleMomentum(momentumParticle);
+ fParticleGun->SetParticleMomentum(momentumParticle*GeV);
  fParticleGun->GeneratePrimaryVertex(anEvent);
 
 G4AnalysisManager *man = G4AnalysisManager::Instance();  
