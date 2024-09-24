@@ -39,13 +39,16 @@ int main(int argc,char** argv)
     //Physics-> RegisterPhysics(new G4OpticalPhysics()); //* 07/05 12:47 pm
     runManager->Initialize();
     
-    G4UIExecutive *ui = new G4UIExecutive(argc,argv);
-    
+    G4UIExecutive *ui = 0;
+    if(argc==1)
+    {
+        ui = new G4UIExecutive(argc,argv);
+    }
     G4VisManager * visManager = new G4VisExecutive();
     visManager->Initialize();
-    
     G4UImanager *UImanager = G4UImanager::GetUIpointer();
-
+    if(ui)
+    {
     UImanager->ApplyCommand("/vis/open OGL");
     UImanager->ApplyCommand("/vis/viewer/set/ViewpointVector 1 1 1");
     UImanager->ApplyCommand("/vis/drawVolume");
@@ -59,7 +62,15 @@ int main(int argc,char** argv)
     //UImanager->ApplyCommand("/vis/scene/");
 
     ui->SessionStart();
-    
+    }
+
+    else
+    {
+        G4String command = "/control/execute ";
+        G4String fileName = argv[1];
+        UImanager->ApplyCommand(command+fileName);
+    }
+
     return 0;
 }
 

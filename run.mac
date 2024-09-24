@@ -1,6 +1,2 @@
-/gun/momentumAmp 0.5 Gev
-/run/beamOn 10
-/gun/momentumAmp 1 Gev
-/run/beamOn 10 
-/gun/momentumAmp 5 Gev
-/run/beamOn 10  
+/run/initialize
+/run/beamOn 1

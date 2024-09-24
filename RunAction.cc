@@ -31,7 +31,6 @@ RunAction::RunAction()
  man->CreateNtuple("Edep","Energy deposited byt the muon");
  man->CreateNtupleDColumn("Energy_Deposition");
  man->CreateNtupleDColumn("Muon_Momentum"); //<----------------------- 21/09/2024 
- //man->CreateNtupleDColumn("Muon_momentum");
  man->FinishNtuple(2);
 
  
