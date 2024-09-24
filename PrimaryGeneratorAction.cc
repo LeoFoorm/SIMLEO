@@ -30,9 +30,10 @@ PrimaryGeneratorAction::~PrimaryGeneratorAction()
 
 void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 {
-
- G4double randomNumber = G4UniformRand();
- G4double momentumParticle = randomNumber*10;
+ G4double minMomentum = 0.01;
+ G4double maxMomentum = 5.;
+ G4double randomNumber = G4UniformRand(); //random number between 0 and 1
+ G4double momentumParticle = minMomentum + ( maxMomentum - minMomentum )*randomNumber;
 
  G4cout << "MOMENTUM FOR THIS EVENT: " << momentumParticle << " GeV" << G4endl;
 

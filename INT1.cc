@@ -15,6 +15,7 @@
 #include "Physics.hh"
 #include "ActionInitialization.hh"
 #include "G4OpticalPhysics.hh"
+#include "Randomize.hh"
 
 
 //argc and argv are parameters used to process command-line arguments. argc argument count and
@@ -24,6 +25,11 @@
 
 int main(int argc,char** argv)
 {
+    long seeds[2];
+    seeds[0] = time(NULL);
+    seeds[1] = 0;
+    CLHEP::HepRandom::setTheSeeds(seeds);
+    
     G4RunManager *runManager = new G4RunManager;
     
     runManager->SetUserInitialization(new myDetectorConstruction());
