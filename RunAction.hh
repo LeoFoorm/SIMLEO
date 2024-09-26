@@ -19,8 +19,10 @@ class RunAction : public G4UserRunAction
 
   void AddPhotonHit() { photonHits++;} 
 
+
 private:
  int photonHits; 
+ 
 };
 
 #endif

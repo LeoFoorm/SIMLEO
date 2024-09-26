@@ -39,13 +39,16 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
 
     G4int evt = G4RunManager::GetRunManager()->GetCurrentEvent()->GetEventID(); 
 
-     //#################################################<-- 27/05 7 pm NUMBER OF DETECTED PHOTONS
+     //################################################# NUMBER OF DETECTED PHOTONS
     const RunAction *runaction = static_cast< const RunAction* >(G4RunManager::GetRunManager()->GetUserRunAction());
-    RunAction *runactionNonConst = const_cast<RunAction *>(runaction); //<--- linea que resuelve error
+    RunAction *runactionNonConst = const_cast<RunAction *>(runaction); //<---
     runactionNonConst->AddPhotonHit();
+    //################################################# ACOMULATE LOCAL TIME
+    const EventAction* constEventAction = static_cast<const EventAction*>(G4RunManager::GetRunManager()->GetUserEventAction());
+    EventAction* eventAction = const_cast<EventAction*>(constEventAction);  // Correct the cast
+     eventAction->AddPhotonHit();
+     eventAction->AddLocalTime(ltime);
     //#################################################
-
-
 
 
     G4AnalysisManager *man = G4AnalysisManager::Instance(); 
@@ -60,6 +63,7 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     man->AddNtupleRow(0); 
 
     man->FillNtupleIColumn(1,0,evt); 
-    man->FillNtupleDColumn(1,1,posDetector[2]); //por qué solo el [2] ? PORQUE ES PARA LA POSICIÓN Z    
+    man->FillNtupleDColumn(1,1,posDetector[2]); //ES PARA LA POSICIÓN Z    
     man->AddNtupleRow(1);
+     
 }

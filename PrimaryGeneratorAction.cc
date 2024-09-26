@@ -18,8 +18,6 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
  //fParticleGun->SetParticleMomentum(1.*GeV); //*
  fParticleGun->SetParticleDefinition(particle);
 
-//man->FillNtupleDColumn(2,0,fEdep);
-//man->AddNtupleRow(2); //<------------------------
 
 }
 
@@ -45,6 +43,5 @@ void PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent)
 G4AnalysisManager *man = G4AnalysisManager::Instance();  
 
 man->FillNtupleDColumn(2,1,momentumParticle);
-//man->AddNtupleRow(2);
 
 }

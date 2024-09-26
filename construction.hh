@@ -74,7 +74,7 @@ class myDetectorConstruction : public G4VUserDetectorConstruction
     G4Element *N, *O; 
     
     
-    G4bool Atmospheric, ProtoDetector; 
+    G4bool ProtoDetector; 
 
 
     G4OpticalSurface *mirrorsurface; //based on the PET video 13/05 1:46 pm

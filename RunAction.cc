@@ -18,6 +18,7 @@ RunAction::RunAction()
  man->CreateNtupleDColumn("fwlen");
  man->CreateNtupleDColumn("fGTime");
  man->CreateNtupleDColumn("fLTime"); 
+ man->CreateNtupleDColumn("fMeanLTime");
  man->FinishNtuple(0);
 
 
@@ -33,6 +34,9 @@ RunAction::RunAction()
  man->CreateNtupleDColumn("Muon_Momentum"); //<----------------------- 21/09/2024 
  man->FinishNtuple(2);
 
+ man->CreateNtuple("Times","The global, local and mean local time");
+ man->CreateNtupleDColumn("Mean_Local_time");  
+ man->FinishNtuple(3);
  
 }
 
@@ -42,7 +46,7 @@ RunAction::~RunAction()
 
 void RunAction:: BeginOfRunAction(const G4Run* run)
 {
- G4AnalysisManager *man = G4AnalysisManager::Instance();   // IMPORTANTE
+ G4AnalysisManager *man = G4AnalysisManager::Instance();   //
 
  G4int runID = run->GetRunID();
 
@@ -53,15 +57,16 @@ void RunAction:: BeginOfRunAction(const G4Run* run)
 
  photonHits = 0; 
 
+
 }
 
 void RunAction::EndOfRunAction(const G4Run*)
 {
  G4AnalysisManager *man = G4AnalysisManager::Instance();
+
+ 
+ G4cout << "NUMBER OF PHOTONS DETECTED: " << photonHits << G4endl; 
  
  man->Write();
  man->CloseFile();
-
- G4cout << "NUMBER OF PHOTONS DETECTED: " << photonHits << G4endl; 
-
 }

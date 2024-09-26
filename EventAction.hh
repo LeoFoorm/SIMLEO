@@ -22,6 +22,9 @@ public:
  virtual void EndOfEventAction(const G4Event*);
 
 
+ void AddLocalTime(G4double ltime); // New function 
+ void AddPhotonHit(); // New function 
+
 //The method AddEdep(G4double edep){ fEdep += edep; } 
 //is used to accumulate energy deposition (edep) in an event.
 //' edep ' is a parameter representing the energy deposited in a single step or process.
@@ -34,6 +37,9 @@ public:
 private:
 
  G4double fEdep;
+
+ G4double totalLocalTime; // To accumulate local time
+ G4int photonHits;        // To count detected photons
  
 };
 

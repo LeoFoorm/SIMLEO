@@ -1,4 +1,3 @@
-// En la parte de virtual void se define la función principal de la clase ActionInitialization corre la particle_gun y calcula los pasos. Es muy importante.
 
 #ifndef ACTIONINITIALIZATION_HH
 #define ACTIONINITIALIZATION_HH
