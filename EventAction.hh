@@ -1,3 +1,5 @@
+//   EVENT ACTION HEADER
+
 #ifndef EVENT_HH
 #define EVENT_HH
 
@@ -16,7 +18,6 @@ public:
  ~EventAction();
 
  
-
  virtual void BeginOfEventAction(const G4Event*);
 
  virtual void EndOfEventAction(const G4Event*);
@@ -24,6 +25,10 @@ public:
 
  void AddLocalTime(G4double ltime); // New function 
  void AddPhotonHit(); // New function 
+
+
+ void AccumulatedEdx(G4double dEdxStep);
+ 
 
 //The method AddEdep(G4double edep){ fEdep += edep; } 
 //is used to accumulate energy deposition (edep) in an event.
@@ -34,13 +39,20 @@ public:
  void AddEdep(G4double edep){ fEdep += edep; }
 
 
+void AddPhotonG();
+G4int GetPhotonCount() const{return fPhotonCount;}
+
+
 private:
 
  G4double fEdep;
 
  G4double totalLocalTime; // To accumulate local time
  G4int photonHits;        // To count detected photons
- 
+ G4double fTotaldEdx;
+ G4int muonCount;
+
+ G4int fPhotonCount;
 };
 
 #endif

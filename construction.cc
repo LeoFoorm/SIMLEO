@@ -1,6 +1,4 @@
-//Author:   Carlos Leonardo Fernandez Luna
-
-//Project:  Construction of detector (.cc)
+//  DETECTOR CONSTRCTION SOURCE
 
 
 #include "construction.hh"
@@ -23,9 +21,9 @@ myDetectorConstruction::myDetectorConstruction()
 
   DefineMaterials();
 
-  env_sizeX = 3*m;
-  env_sizeY = 3*m;
-  env_sizeZ = 3*m;
+  env_sizeX = 1.5*m;
+  env_sizeY = 1.5*m;
+  env_sizeZ = 1.5*m;
   
 }
 
@@ -81,7 +79,9 @@ void myDetectorConstruction::DefineMaterials()
   G4int numberOfEntries = energy.size();
 
 
- G4OpticalParameters::Instance()->SetScintFiniteRiseTime(true);
+ G4OpticalParameters::Instance()->SetScintFiniteRiseTime(true);   // Setting finite rise time for scintillation 
+
+
  G4NistManager *nist = G4NistManager::Instance();
 
  worldMaterial = nist->FindOrBuildMaterial("G4_AIR");

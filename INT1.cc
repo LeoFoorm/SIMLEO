@@ -2,7 +2,7 @@
 
 //Project:  Construction of detector (.cc)
 
-//THIS IS THE   __ main __
+//THIS IS THE    main 
 
 
 #include <iostream>
@@ -35,8 +35,6 @@ int main(int argc,char** argv)
     runManager->SetUserInitialization(new myDetectorConstruction());
     runManager->SetUserInitialization(new PhysicsList());
     runManager->SetUserInitialization(new ActionInitialization());
-    //runManager->SetUserInitialization(Physics); //* 07/05 2:36 pm
-    //Physics-> RegisterPhysics(new G4OpticalPhysics()); //* 07/05 12:47 pm
     runManager->Initialize();
     
     G4UIExecutive *ui = 0;

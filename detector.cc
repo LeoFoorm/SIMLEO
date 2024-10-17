@@ -1,3 +1,5 @@
+//      SENSITIVE DETECTOR SORUCE
+
 #include "detector.hh"
 
 SensitiveDetector::SensitiveDetector(G4String name) : G4VSensitiveDetector(name)
@@ -19,9 +21,9 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
 
     G4ThreeVector posPhoton = preStepPoint->GetPosition();
     G4ThreeVector momentumphoton = preStepPoint->GetMomentum(); 
-    G4double time = preStepPoint->GetGlobalTime(); //since the primary particle was created; since the beggining of the event;Muon to Scintillator
-    G4double ltime = preStepPoint->GetLocalTime(); //since the particle was created; photon to SiPM
-    G4double wlen = (1.239841939*eV/momentumphoton.mag())*1E+03; //UNIDADES nanometros
+    G4double time = preStepPoint->GetGlobalTime();      //since the primary particle was created; since the beggining of the event;Muon to Scintillator
+    G4double ltime = preStepPoint->GetLocalTime();      //since the particle was created; photon to SiPM
+    G4double wlen = (1.239841939*eV/momentumphoton.mag())*1E+03;        //Units [nm]
 
     //G4cout<<" PHOTON POSITION "<<posPhoton<<G4endl;  //position of the detected photons
     
@@ -43,6 +45,8 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     const RunAction *runaction = static_cast< const RunAction* >(G4RunManager::GetRunManager()->GetUserRunAction());
     RunAction *runactionNonConst = const_cast<RunAction *>(runaction); //<---
     runactionNonConst->AddPhotonHit();
+
+    
     //################################################# ACOMULATE LOCAL TIME
     const EventAction* constEventAction = static_cast<const EventAction*>(G4RunManager::GetRunManager()->GetUserEventAction());
     EventAction* eventAction = const_cast<EventAction*>(constEventAction);  // Correct the cast

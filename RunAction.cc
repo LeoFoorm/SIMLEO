@@ -1,3 +1,5 @@
+//    RUN ACTION SOURCE
+
 #include "RunAction.hh"
 
 RunAction::RunAction()
@@ -28,11 +30,13 @@ RunAction::RunAction()
  man->FinishNtuple(1);
 
 
- //man->CreateH1("Energy Deposition","Energy Deposition",100,0.,10.*MeV); 
  man->CreateNtuple("Edep","Energy deposited byt the muon");
- man->CreateNtupleDColumn("Energy_Deposition");
- man->CreateNtupleDColumn("Muon_Momentum"); //<----------------------- 21/09/2024 
+ man->CreateNtupleDColumn("Energy_Deposition_MeV");
+ man->CreateNtupleDColumn("Particle_Momentum_GeV");  
+ man->CreateNtupleDColumn("EnergyDep_MeVmm");  
+ man->CreateNtupleDColumn("Particle_Momentum_MeV");
  man->FinishNtuple(2);
+
 
  man->CreateNtuple("Times","The global, local and mean local time");
  man->CreateNtupleDColumn("Mean_Local_time");  
@@ -56,9 +60,8 @@ void RunAction:: BeginOfRunAction(const G4Run* run)
  man->OpenFile("Output"+strRunID.str()+".root");
 
  photonHits = 0; 
-
-
 }
+
 
 void RunAction::EndOfRunAction(const G4Run*)
 {

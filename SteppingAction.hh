@@ -1,3 +1,5 @@
+//   STEPPING ACTION HEADERD
+
 #ifndef STEPPING_HH 
 #define STEPPING_HH
 
@@ -5,7 +7,7 @@
 #include "G4Step.hh"
 #include "construction.hh"
 #include "EventAction.hh"
-
+#include "G4OpticalPhoton.hh"
 
 class SteppingAction : public G4UserSteppingAction
 {

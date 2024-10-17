@@ -1,3 +1,5 @@
+//      SENSITIVE DETECTOR HEADER 
+
 #ifndef DETECTOR_HH
 #define DETECTOR_HH
 
