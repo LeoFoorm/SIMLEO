@@ -1,3 +1,5 @@
+//    RUN ACION HEADER
+
 #ifndef RUN_HH
 #define RUN_HH
 
@@ -17,7 +19,7 @@ class RunAction : public G4UserRunAction
   virtual void BeginOfRunAction(const G4Run*);
   virtual void EndOfRunAction(const G4Run*);
 
-  void AddPhotonHit() { photonHits++;} 
+  void AddPhotonHit() { photonHits++;} //<---
 
 
 private:

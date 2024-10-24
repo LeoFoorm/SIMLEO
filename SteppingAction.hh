@@ -1,4 +1,4 @@
-//   STEPPING ACTION HEADERD
+//   STEPPING ACTION HEADER
 
 #ifndef STEPPING_HH 
 #define STEPPING_HH
@@ -8,6 +8,9 @@
 #include "construction.hh"
 #include "EventAction.hh"
 #include "G4OpticalPhoton.hh"
+#include "G4RandomTools.hh"
+#include "G4Poisson.hh"
+
 
 class SteppingAction : public G4UserSteppingAction
 {
@@ -23,6 +26,8 @@ public:
 private:
 
  EventAction *fEventAction;
+
+ G4double generated_photons;  //<--
  
 };
 

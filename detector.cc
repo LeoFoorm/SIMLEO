@@ -27,10 +27,7 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
 
     //G4cout<<" PHOTON POSITION "<<posPhoton<<G4endl;  //position of the detected photons
     
-
     const G4VTouchable *touchable = aStep->GetPreStepPoint()->GetTouchable();
-    G4int copyNo = touchable->GetCopyNumber();
-    
     G4VPhysicalVolume *PhysVol = touchable->GetVolume();
     G4ThreeVector posDetector = PhysVol->GetTranslation();
 
@@ -43,8 +40,14 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
 
      //################################################# NUMBER OF DETECTED PHOTONS
     const RunAction *runaction = static_cast< const RunAction* >(G4RunManager::GetRunManager()->GetUserRunAction());
-    RunAction *runactionNonConst = const_cast<RunAction *>(runaction); //<---
+    RunAction *runactionNonConst = const_cast<RunAction *>(runaction); 
     runactionNonConst->AddPhotonHit();
+
+
+    //################################################# NUMBER OF DETECTED PHOTONS PER EVENT
+   // const EventAction *eventaction_photons = static_cast< const EventAction* >(G4RunManager::GetRunManager()->GetUserEventAction());
+    //EventAction *eventactionNonConst = const_cast<EventAction *>(eventaction_photons); 
+    //eventactionnNonConst->AddPhotonHit();
 
     
     //################################################# ACOMULATE LOCAL TIME
@@ -52,7 +55,7 @@ G4bool SensitiveDetector::ProcessHits(G4Step *aStep, G4TouchableHistory *ROhist)
     EventAction* eventAction = const_cast<EventAction*>(constEventAction);  // Correct the cast
      eventAction->AddPhotonHit();
      eventAction->AddLocalTime(ltime);
-    //#################################################
+
 
 
     G4AnalysisManager *man = G4AnalysisManager::Instance(); 

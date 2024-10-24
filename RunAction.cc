@@ -35,6 +35,8 @@ RunAction::RunAction()
  man->CreateNtupleDColumn("Particle_Momentum_GeV");  
  man->CreateNtupleDColumn("EnergyDep_MeVmm");  
  man->CreateNtupleDColumn("Particle_Momentum_MeV");
+ man->CreateNtupleDColumn("Photons_Generated_G4method");
+ man->CreateNtupleDColumn("Photons_Generated_Edep");
  man->FinishNtuple(2);
 
 

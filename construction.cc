@@ -107,7 +107,7 @@ void myDetectorConstruction::DefineMaterials()
  prop->AddProperty("SCINTILLATIONCOMPONENT1",energy,fraction,numberOfEntries);
  prop->AddConstProperty("SCINTILLATIONTIMECONSTANT1", 1.8*ns);
  prop->AddConstProperty("SCINTILLATIONRISETIME1", 0.7*ns); //decay time of the scintillator
- prop->AddConstProperty("SCINTILLATIONYIELD", 10./keV);//amount of photons per (in this case) KeV
+ prop->AddConstProperty("SCINTILLATIONYIELD", 10.666666/keV);//amount of photons per (in this case) KeV       <------- ATENTION 
  prop->AddConstProperty("RESOLUTIONSCALE", 1.);
  prop->AddProperty("ABSLENGTH",energy,absSC,numberOfEntries);
  mirror->AddProperty("REFLECTIVITY", energy, reflectivity);

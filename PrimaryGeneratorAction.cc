@@ -9,7 +9,7 @@ PrimaryGeneratorAction::PrimaryGeneratorAction()
 
  G4ParticleTable *particleTable = G4ParticleTable::GetParticleTable();
 
- G4ParticleDefinition *particle = particleTable->FindParticle("mu+"); //muon+. Its number on the Particle Data Group
+ G4ParticleDefinition *particle = particleTable->FindParticle("pi+"); //muon+. Its number on the Particle Data Group
 
 
 

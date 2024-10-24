@@ -43,6 +43,13 @@ void AddPhotonG();
 G4int GetPhotonCount() const{return fPhotonCount;}
 
 
+void AddPhotonG_UsingEdep(G4double generated_photons){fGenerated_photons += generated_photons;} //<--
+G4int GetPhotonCount_Edep() const{return fGenerated_photons;} //<-- ??
+
+
+//void AddPhotonsDetected(); //<-- to count number of photons detected by the SiPM, per event
+
+
 private:
 
  G4double fEdep;
@@ -53,6 +60,9 @@ private:
  G4int muonCount;
 
  G4int fPhotonCount;
+ G4int fGenerated_photons; //<-- #photons using Edep (#PUE)
+
+ //G4int PhotonDetected_perevent; //<-- to count number of photons detected by the SiPM, per event
 };
 
 #endif
