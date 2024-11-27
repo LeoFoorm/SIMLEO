@@ -9,3 +9,7 @@ Dentro de este directorio haz cmake .. y luego make. Luego corres el programa co
 Para obtener el gráfico de Bethe Block, en ROOT hacer:
 
 Edep->Draw("Energy_Deposition:Muon_Momentum");
+
+
+PLEASE CHECK MID-MODULE
+
