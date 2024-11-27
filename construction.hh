@@ -1,3 +1,5 @@
+//    DETECTOR CONSTRUCTION HEADER
+
 #ifndef CONSTRUCTION_HH
 #define CONSTRUCTION_HH
 
@@ -27,7 +29,6 @@ class G4LogicalVolume;
 class myDetectorConstruction : public G4VUserDetectorConstruction
 {
   public:
-    
 
     myDetectorConstruction();
     ~myDetectorConstruction();
@@ -37,20 +38,30 @@ class myDetectorConstruction : public G4VUserDetectorConstruction
     virtual G4VPhysicalVolume *Construct(); 
 
 
-    void ConstructProtoDetector();
-    void ConstructAtmosphere();     // ELIMINAR LO ANTES POSIBLE
+    void ConstructSingleBar();
+    void ConstructMIDModule();     //<--- 
+    void ConstructTwoBars();
 
 
-    G4LogicalVolume *GetScoringVolume() const {return fScoringVolume;}  //<---- 
-
+    G4LogicalVolume *GetScoringVolume() const {return fScoringVolume;}  //<---- for the edep 
+    G4LogicalVolume *GetScoringVolume1() const {return fScoringVolume_one;} //
+    G4LogicalVolume *GetScoringVolume2() const {return fScoringVolume_two;} //
 
     G4double wavelength, lightOutput;
+
+    G4bool Single_bar; 
+    G4bool MID_Module; 
+    G4bool Two_Bars;
+    G4double distance_modules; 
+    
+    bool Is_Single_Bar() const {return Single_bar; }; //
+    bool Is_MID() const {return MID_Module;}; //
+    bool Is_Two_Bars() const { return Two_Bars;} //
 
 
   private: 
 
-
-    G4LogicalVolume *Logicsipm; 
+   //G4LogicalVolume *Logicsipm; 
 
 
    //In order to give the sensitivity characteristic to the detector, we have to references to this object outsid. That's why we create this private
@@ -59,22 +70,29 @@ class myDetectorConstruction : public G4VUserDetectorConstruction
 
     G4double env_sizeX, env_sizeY, env_sizeZ; 
 
-    G4GenericMessenger *fMessenger; 
+    G4GenericMessenger *fMessenger;  
 
 
-    G4Box  *SolidWorld, *Solidbar, *Solidsipm, *SolidAtmos, *Solidmylar, *SolidInnermylar;
-    G4LogicalVolume *LogicWorld, *Logicbar, *LogicAtmos[5], *Logicmylar;  
-    G4VPhysicalVolume *PhysicalWorld, *Physicalbar, *Physicalsipm, *PhysicalAtmos[5], *Physicalmylar;
+    G4Box  *SolidWorld, *Solidbar, *Solidsipm, *Solidmylar, *SolidInnermylar;
+    G4LogicalVolume *LogicWorld, *Logicbar, *Logicmylar, *Logicsipm;  
+    G4VPhysicalVolume *PhysicalWorld, *Physicalbar, *Physicalsipm, *Physicalmylar, 
+                      *Physical_MID_A, *Physical_SiPM_MID_A, *Physical_Mylar_MID_A, 
+                      *Physical_MID_B, *Physical_SiPM_MID_B, *Physical_Mylar_MID_B,
+                      *Phys_Bar_One, *Phys_Bar_One_SiPM, *Phys_Bar_One_Mylar,
+                      *Phys_Bar_Two, *Phys_Bar_Two_SiPM, *Phys_Bar_Two_Mylar;
 
     
     void DefineMaterials();
 
 
-    G4Material *plastic, *worldMaterial, *Air[5], *mylarMaterial;
-    G4Element *N, *O; 
+    G4Material *plastic, *worldMaterial, *mylarMaterial;
+   
     
     
-    G4bool ProtoDetector; 
+    //G4bool Single_bar; 
+    //G4bool MID_Module; 
+    //G4bool Two_Bars;
+    //G4double distance_modules; 
 
 
     G4OpticalSurface *mirrorsurface; //based on the PET video 13/05 1:46 pm
@@ -82,6 +100,8 @@ class myDetectorConstruction : public G4VUserDetectorConstruction
 
     G4LogicalVolume *fScoringVolume; //<-----
 
+    G4LogicalVolume *fScoringVolume_one; //
+    G4LogicalVolume *fScoringVolume_two; //
 
 };
 

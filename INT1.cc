@@ -53,11 +53,11 @@ int main(int argc,char** argv)
     UImanager->ApplyCommand("/vis/viewer/set/autoRefresh true");//update everytime it creates a new event
     UImanager->ApplyCommand("/vis/scene/add/trajectories smooth");//to show the particle
     UImanager->ApplyCommand("/vis/scene/endofEventAction accumulate");//to show the particle
-    UImanager->ApplyCommand("/vis/scene/add/axes 0 0 0 1 m");
+    UImanager->ApplyCommand("/vis/scene/add/axes 0 0 0 2.7 m");
     UImanager->ApplyCommand("/vis/scene/add/hits");
     UImanager->ApplyCommand("/vis/scene/add/eventID");
     UImanager->ApplyCommand("/vis/scene/add/date");
-    //UImanager->ApplyCommand("/vis/scene/");
+    UImanager->ApplyCommand("/vis/scene/");
 
     ui->SessionStart();
     }
@@ -67,8 +67,8 @@ int main(int argc,char** argv)
         G4String command = "/control/execute ";
         G4String fileName = argv[1];
         UImanager->ApplyCommand(command+fileName);
+    
     }
-
     return 0;
 }
 

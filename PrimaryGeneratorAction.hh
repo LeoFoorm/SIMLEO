@@ -10,6 +10,7 @@
 #include "G4SystemOfUnits.hh"
 #include "G4ParticleTable.hh"
 #include "Randomize.hh"
+#include "G4GenericMessenger.hh"
 
 
 
@@ -20,10 +21,14 @@ class PrimaryGeneratorAction : public G4VUserPrimaryGeneratorAction
   ~PrimaryGeneratorAction();
 
   virtual void GeneratePrimaries(G4Event*);
+  void SetConfiguration(G4String configName);  // New function to set configurations
+
 
  private:
   G4ParticleGun *fParticleGun;
 
+  G4GenericMessenger *fMessenger_config; 
+  G4String fConfigName;
 };
 
 #endif
